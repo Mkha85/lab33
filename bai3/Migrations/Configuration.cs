@@ -9,7 +9,7 @@ namespace bai3.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(bai3.Models.ApplicationDbContext context)

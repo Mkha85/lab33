@@ -50,12 +50,21 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.9\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -168,36 +177,47 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\applicationDbcontext_dbContext.cs" />
+    <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
+    <Compile Include="Controllers\FollowingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Dtos\AttendanceDto.cs" />
+    <Compile Include="Dtos\FollowingDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202206030126152_InitialModel.cs" />
-    <Compile Include="Migrations\202206030126152_InitialModel.Designer.cs">
-      <DependentUpon>202206030126152_InitialModel.cs</DependentUpon>
+    <Compile Include="Migrations\202206200639173_InitialModel.cs" />
+    <Compile Include="Migrations\202206200639173_InitialModel.Designer.cs">
+      <DependentUpon>202206200639173_InitialModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202206030146432_CreateTableCourse.cs" />
-    <Compile Include="Migrations\202206030146432_CreateTableCourse.Designer.cs">
-      <DependentUpon>202206030146432_CreateTableCourse.cs</DependentUpon>
+    <Compile Include="Migrations\202206200642440_CreateTableCourse.cs" />
+    <Compile Include="Migrations\202206200642440_CreateTableCourse.Designer.cs">
+      <DependentUpon>202206200642440_CreateTableCourse.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202206030202323_PopularCategoryTable.cs" />
-    <Compile Include="Migrations\202206030202323_PopularCategoryTable.Designer.cs">
-      <DependentUpon>202206030202323_PopularCategoryTable.cs</DependentUpon>
+    <Compile Include="Migrations\202206200643341_PopularCategoryTable..cs" />
+    <Compile Include="Migrations\202206200643341_PopularCategoryTable..Designer.cs">
+      <DependentUpon>202206200643341_PopularCategoryTable..cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202206100207163_AddNameColumnToApplicationUser.cs" />
-    <Compile Include="Migrations\202206100207163_AddNameColumnToApplicationUser.Designer.cs">
-      <DependentUpon>202206100207163_AddNameColumnToApplicationUser.cs</DependentUpon>
+    <Compile Include="Migrations\202206200644342_AddNameColumnToApplicationUser.cs" />
+    <Compile Include="Migrations\202206200644342_AddNameColumnToApplicationUser.Designer.cs">
+      <DependentUpon>202206200644342_AddNameColumnToApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206200645350_Attendance.cs" />
+    <Compile Include="Migrations\202206200645350_Attendance.Designer.cs">
+      <DependentUpon>202206200645350_Attendance.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\Attendance.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Following.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -281,17 +301,20 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202206030126152_InitialModel.resx">
-      <DependentUpon>202206030126152_InitialModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202206200639173_InitialModel.resx">
+      <DependentUpon>202206200639173_InitialModel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206030146432_CreateTableCourse.resx">
-      <DependentUpon>202206030146432_CreateTableCourse.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202206200642440_CreateTableCourse.resx">
+      <DependentUpon>202206200642440_CreateTableCourse.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206030202323_PopularCategoryTable.resx">
-      <DependentUpon>202206030202323_PopularCategoryTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202206200643341_PopularCategoryTable..resx">
+      <DependentUpon>202206200643341_PopularCategoryTable..cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206100207163_AddNameColumnToApplicationUser.resx">
-      <DependentUpon>202206100207163_AddNameColumnToApplicationUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202206200644342_AddNameColumnToApplicationUser.resx">
+      <DependentUpon>202206200644342_AddNameColumnToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206200645350_Attendance.resx">
+      <DependentUpon>202206200645350_Attendance.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
